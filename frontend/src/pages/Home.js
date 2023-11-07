@@ -24,7 +24,9 @@ const Home = () => {
 
   return (
     <div className="pl-10 pr-10">
-      <h1 className="text-4xl font-bold text-center pt-10 pb-5">Mad Eats</h1>
+      <h1 className="text-4xl font-bold text-center pt-10 pb-5">
+        Mad Eats: All Ratings
+      </h1>
       <div className="max-w-screen-xl mx-auto pt-10 pl-10 pr-10">
         <RatingForm />
       </div>
