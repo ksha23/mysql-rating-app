@@ -54,10 +54,8 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const deleted = deleteRating(id);
-    if (deleted) {
-      res.status(200).json({ message: "Successfully deleted rating" });
-    }
+    const deleted = await deleteRating(id);
+    res.status(200).json(deleted);
   } catch (error) {
     res.status(404).json({ error: "Error deleting rating" });
   }

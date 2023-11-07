@@ -6,10 +6,10 @@ import DiningHallWithReviews from "./pages/DiningHallWithReviews";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-gray-100">
       <BrowserRouter>
         <Navbar />
-        <div className="pages">
+        <div className="py-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/halls" element={<DiningHall />} />

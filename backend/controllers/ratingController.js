@@ -82,21 +82,20 @@ const deleteRating = async (id) => {
   await pool.query(
     `
     UPDATE diningLocations
-    SET stars = (stars * numberOfReviews - ?) / (numberOfReviews - 1),
-    numberOfReviews = numberOfReviews - 1
+    SET
+      stars = CASE
+        WHEN numberOfReviews > 1 THEN (stars * (numberOfReviews - 1) - ?) / (numberOfReviews - 1)
+        ELSE 0  -- Set stars to 0 if it's the last review being deleted
+      END,
+      numberOfReviews = numberOfReviews - 1
     WHERE locationName = ?
     `,
+
     [check[0].stars, check[0].diningLocation]
   );
 
-  // verify it was deleted
-  try {
-    await getRating(id);
-    return false;
-  } catch (error) {
-    // this should error if successful
-    return true;
-  }
+  //return deleted
+  return check[0];
 };
 
 module.exports = {

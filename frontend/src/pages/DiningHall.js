@@ -6,21 +6,33 @@ const DiningHall = () => {
 
   useEffect(() => {
     const fetchDiningHalls = async () => {
-      const response = await fetch("/api/diningHalls");
-      const json = await response.json();
-
-      if (response.ok) {
-        setHalls(json);
+      try {
+        const response = await fetch("/api/diningHalls");
+        if (response.ok) {
+          const json = await response.json();
+          setHalls(json);
+        } else {
+          setHalls([]); // Handle errors or set default value for halls state
+        }
+      } catch (error) {
+        console.error("Error fetching dining halls:", error); // Handle fetch errors
       }
     };
-
     fetchDiningHalls();
   }, []);
 
   return (
-    <div className="home">
-      {halls &&
-        halls.map((hall) => <DiningDetails key={hall.id} diningHall={hall} />)}
+    <div className="flex justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 pl-8 pr-8">
+        {halls &&
+          halls.map((hall) => (
+            <div key={hall.id} className="w-full">
+              <div className="p-4">
+                <DiningDetails diningHall={hall} className="h-full" />
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

@@ -53,20 +53,28 @@ const DiningHallWithReviews = () => {
 
   return (
     <>
-      <div className="hallInfo">
-        {diningHall && (
-          <DiningDetails
-            key={diningHall.id}
-            diningHall={diningHall}
-          ></DiningDetails>
-        )}
-        <RatingForm />
-        {ratings &&
-          ratings.map((rating) => (
-            <div key={rating.id}>
-              <RatingDetails rating={rating} />
+      <div className="pl-10 pr-10 justify-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+          {diningHall && (
+            <div className="md:col-span-1 max-w-xxl px-5">
+              <DiningDetails key={diningHall.id} diningHall={diningHall} />
             </div>
-          ))}
+          )}
+          <div className="md:col-span-1 max-w-xxl px-5">
+            <RatingForm />
+          </div>
+        </div>
+        <div className="w-full mt-4 md:w-full lg:w-full px-5">
+          {ratings && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {ratings.map((rating) => (
+                <div key={rating.id} className="md:col-span-1">
+                  <RatingDetails rating={rating} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

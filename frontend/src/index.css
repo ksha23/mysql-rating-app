@@ -1,48 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
-
-/* Variables */
-:root {
-  --primary: #2395b8;
-  --error: #e7195a;
-  --background: #f1f1f1;
-  --text-primary: #333;
-  --text-secondary: #555;
-}
-
-/* Reset and General Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--background);
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-}
-
-/* Page Styles */
-.pages {
-  max-width: 2000px;
-  justify-content: center;
-  margin: 20px 100px;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.home {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.hallInfo {
-  display: flex;
-  flex-wrap: wrap;
-  gap:20px;
-  /* max-width: 100%; */
-}
-

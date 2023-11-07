@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useRatingsContext } from "../hooks/useRatingsContext";
-import "./RatingForm.css";
 
 const RatingForm = () => {
   const [diningHalls, setDiningHalls] = useState([]);
@@ -62,59 +61,75 @@ const RatingForm = () => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h3>Add a New Rating</h3>
-      <label>Dining Hall:</label>
-      <select
-        value={diningHall}
-        onChange={(e) => {
-          setSelectedDiningHall(e.target.value);
-        }}
-      >
-        <option value="">Select a dining hall</option>
-        {diningHalls.map((hall) => (
-          <option key={hall.id} value={hall.locationName}>
-            {hall.locationName}
-          </option>
-        ))}
-      </select>
+    <form
+      className="p-4 rounded-md bg-gray-300 shadow-md"
+      onSubmit={handleSubmit}
+    >
+      <h3 className="text-xl font-bold mb-4">Add a New Rating</h3>
+      <div className="mb-4">
+        <label className="block mb-1">Dining Hall:</label>
+        <select
+          value={diningHall}
+          onChange={(e) => {
+            setSelectedDiningHall(e.target.value);
+          }}
+          className="w-full p-2 rounded-md border"
+        >
+          <option value="">Select a dining hall</option>
+          {diningHalls.map((hall) => (
+            <option key={hall.id} value={hall.locationName}>
+              {hall.locationName}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <label>Rating Title:</label>
-      <input
-        type="text"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        className={emptyFields.includes("title") ? "error" : ""}
-      ></input>
+      <div className="mb-4">
+        <label className="block mb-1">Rating Title:</label>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          className={`w-full p-2 rounded-md border ${
+            emptyFields.includes("title") ? "border-red-500" : ""
+          }`}
+        />
+      </div>
 
-      <label>Stars:</label>
-      <input
-        type="number"
-        onChange={(e) => {
-          setStars(e.target.value);
-        }}
-        value={stars}
-        min="0" // Set the minimum value to 0
-        max="5" // Set the maximum value to 5
-        className={emptyFields.includes("stars") ? "error" : ""}
-      />
-      {/* <input 
-            type = "number"
-            onChange = {(e)=> setStars(e.target.value)}
-            value = {stars}
-            className={emptyFields.includes('stars')?'error':''}
-            >
-        </input> */}
+      <div className="mb-4">
+        <label className="block mb-1">Stars:</label>
+        <input
+          type="number"
+          onChange={(e) => {
+            setStars(e.target.value);
+          }}
+          value={stars}
+          min="0" // Set the minimum value to 0
+          max="5" // Set the maximum value to 5
+          className={`w-full p-2 rounded-md border ${
+            emptyFields.includes("stars") ? "border-red-500" : ""
+          }`}
+        />
+      </div>
 
-      <label>Review: </label>
-      <textarea
-        type="text"
-        onChange={(e) => setReview(e.target.value)}
-        value={review}
-        className={emptyFields.includes("review") ? "error" : ""}
-      ></textarea>
-      <button>Add Rating</button>
-      {error && <div className="error">{error}</div>}
+      <div className="mb-4">
+        <label className="block mb-1">Review:</label>
+        <textarea
+          type="text"
+          onChange={(e) => setReview(e.target.value)}
+          value={review}
+          rows={10}
+          className={`w-full p-2 rounded-md border ${
+            emptyFields.includes("review") ? "border-red-500" : ""
+          }`}
+        />
+      </div>
+
+      <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+        Add Rating
+      </button>
+
+      {error && <div className="text-red-500 mt-2">{error}</div>}
     </form>
   );
 };

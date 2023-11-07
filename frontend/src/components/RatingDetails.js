@@ -1,6 +1,5 @@
 import { useRatingsContext } from "../hooks/useRatingsContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import "./RatingDetails.css";
 
 const RatingDetails = ({ rating }) => {
   const { dispatch } = useRatingsContext();
@@ -10,6 +9,7 @@ const RatingDetails = ({ rating }) => {
       method: "DELETE",
     });
     const json = await response.json();
+    console.log(json);
 
     if (response.ok) {
       dispatch({ type: "DELETE_RATING", payload: json });
@@ -17,23 +17,27 @@ const RatingDetails = ({ rating }) => {
   };
 
   return (
-    <div className="rating-details-cotainer">
-      <div className="rating-details">
-        <h4 className="rating-title">{rating.title}</h4>
-        <p className="stars">
+    <div className="flex flex-col md:flex-row md:space-x-4 md:items-center bg-white p-4 rounded-md shadow-md my-4">
+      <div className="w-full md:w-1/2">
+        <h4 className="text-xl font-semibold mb-2">{rating.title}</h4>
+        <p className="text-lg">
           <strong>Stars: </strong>
           {"★".repeat(rating.stars)}
         </p>
-        <p className="rating-text">
+        <p className="text-base mt-2">
           <strong>Rating: </strong>
           {rating.review}
         </p>
-        <p className="time-ago">
+        {/* <p className="text-sm text-gray-600 mt-2">
           {formatDistanceToNow(new Date(rating.created), { addSuffix: true })}
-        </p>
-        <br></br>
-        <button className="material-symbols-outlined" onClick={handleClick}>
-          delete
+        </p> */}
+      </div>
+      <div className="w-full md:w-1/2 flex justify-end items-center mt-4 md:mt-0">
+        <button
+          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+          onClick={handleClick}
+        >
+          Delete
         </button>
       </div>
     </div>
