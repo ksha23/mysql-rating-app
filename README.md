@@ -3,11 +3,19 @@
 ## Local Setup
 
 1. git clone locally
-2. setup mongoDB either through Atlas or locally
-3. cd into backend/models and run "node seedDatabase.js" to seed database (NOTE: THIS DELETES ALL DININGHALLS AND RATINGS IF THEY CURRENTLY EXIST!)
-4. set mongoDB URI in .env file under MONGO_URI
-5. set port under PORT in .env file
-6. run npm install (install dependencies)
+2. Get MySQL downloaded locally and start the database server. Make sure to remember your password
+3. Open a terminal and cd into rating-app/backend/schemas
+4. run "mysql -u <name of account (ex: root)> -p" Enter your password when prompted
+5. run "source ratingSchema.sql" then run "source diningLocationSchema.sql"
+6. create a .env file in the root of the backend folder and define the following
+
+PORT='choose port number'
+MYSQL_HOST='127.0.0.1'
+MYSQL_USER='username here'
+MYSQL_PASSWORD='your password here'
+MYSQL_DATABASE='madEats'
+
+6. run npm install (install dependencies) for backend and frontend
 7. for the backend, run "npm run dev"
 8. for the frontend, run "npm start"
 
