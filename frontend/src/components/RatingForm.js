@@ -4,43 +4,17 @@ import "./RatingForm.css";
 
 const RatingForm = () => {
   const [diningHalls, setDiningHalls] = useState([]);
-  const [selectedDiningHall, setSelectedDiningHall] = useState("");
+  const [diningHall, setSelectedDiningHall] = useState("");
 
   const { dispatch } = useRatingsContext();
   const [title, setTitle] = useState("");
   const [stars, setStars] = useState("");
   const [review, setReview] = useState("");
-  const [hallID, setSelectedDiningHallID] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
   useEffect(() => {
-    // const updateDiningHallStats = async (id, stars) => {
-    //   try {
-    //     const response = await fetch(`/api/diningHalls/stats/${id}`, {
-    //       method: "PATCH",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ stars }),
-    //     });
-
-    //     if (response.ok) {
-    //       console.log("Dining hall stats updated successfully.");
-    //       // You can handle success here, such as updating the UI.
-    //     } else {
-    //       console.error("Failed to update dining hall stats.");
-    //       // Handle the error case here.
-    //     }
-    //   } catch (error) {
-    //     console.error(
-    //       "An error occurred while updating dining hall stats:",
-    //       error
-    //     );
-    //     // Handle the error case here.
-    //   }
-    // };
-
+    // Fetch the dining halls from the API
     const fetchDiningHalls = async () => {
       try {
         const response = await fetch("/api/diningHalls");
@@ -57,9 +31,10 @@ const RatingForm = () => {
     fetchDiningHalls();
   }, []);
 
+  // Handle the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const rating = { title, stars, review, hallID };
+    const rating = { title, stars, review, diningHall };
 
     const responseRating = await fetch("/api/ratings", {
       method: "POST",
@@ -79,33 +54,10 @@ const RatingForm = () => {
       setTitle("");
       setStars("");
       setReview("");
+      setSelectedDiningHall("");
       setError(null);
       setEmptyFields([]);
       dispatch({ type: "CREATE_RATING", payload: jsonRating });
-    }
-
-    try {
-      console.log("jsonRating:" + JSON.stringify(jsonRating));
-      const responseDiningHall = await fetch(
-        `/api/diningHalls/${selectedDiningHall}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonRating),
-        }
-      );
-
-      if (responseDiningHall.ok) {
-        // Handle success (e.g., clear the form)
-        setSelectedDiningHall("");
-      } else {
-        // Handle errors
-        console.error("Could not add the review to the dining hall");
-      }
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -114,20 +66,15 @@ const RatingForm = () => {
       <h3>Add a New Rating</h3>
       <label>Dining Hall:</label>
       <select
-        value={selectedDiningHall}
+        value={diningHall}
         onChange={(e) => {
           setSelectedDiningHall(e.target.value);
-
-          const selectedHall = diningHalls.find(
-            (hall) => hall._id === e.target.value
-          );
-          setSelectedDiningHallID(selectedHall ? selectedHall._id : "");
         }}
       >
         <option value="">Select a dining hall</option>
         {diningHalls.map((hall) => (
-          <option key={hall._id} value={hall._id}>
-            {hall.name}
+          <option key={hall.id} value={hall.locationName}>
+            {hall.locationName}
           </option>
         ))}
       </select>
@@ -144,8 +91,6 @@ const RatingForm = () => {
       <input
         type="number"
         onChange={(e) => {
-          // Ensure the value is within the desired range (0 to 5)
-          // const value = Math.min(5, Math.max(0, e.target.value));
           setStars(e.target.value);
         }}
         value={stars}
