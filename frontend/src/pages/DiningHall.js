@@ -22,18 +22,23 @@ const DiningHall = () => {
   }, []);
 
   return (
-    <div className="flex justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 pl-8 pr-8">
-        {halls &&
-          halls.map((hall) => (
-            <div key={hall.id} className="w-full">
-              <div className="p-4">
-                <DiningDetails diningHall={hall} className="h-full" />
+    <>
+      <h1 className="text-4xl font-bold text-center pt-10 pb-5">
+        Mad Eats: Dining Halls
+      </h1>
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 pl-8 pr-8">
+          {halls &&
+            halls.map((hall) => (
+              <div key={hall.id} className="w-full">
+                <div className="p-4">
+                  <DiningDetails diningHall={hall} className="h-full" />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

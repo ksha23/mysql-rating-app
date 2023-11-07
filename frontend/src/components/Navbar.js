@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="flex items-center pl-4">
         <Link to="/" className="hover:underline">
           <img src={logoImage} alt="logo" className="w-6 h-6 mr-2 inline" />
-          Home
+          All Ratings
         </Link>
         <div className="flex space-x-4 ml-4">
           <Link to="/halls" className="hover:underline">

@@ -54,6 +54,9 @@ const DiningHallWithReviews = () => {
   return (
     <>
       <div className="pl-10 pr-10 justify-center items-center">
+        <h1 className="text-4xl font-bold text-center pt-10 pb-10">
+          {locationName}
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
           {diningHall && (
             <div className="md:col-span-1 max-w-xxl px-5">
