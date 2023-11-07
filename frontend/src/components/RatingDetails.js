@@ -28,9 +28,9 @@ const RatingDetails = ({ rating }) => {
           <strong>Rating: </strong>
           {rating.review}
         </p>
-        {/* <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-gray-600 mt-2">
           {formatDistanceToNow(new Date(rating.created), { addSuffix: true })}
-        </p> */}
+        </p>
       </div>
       <div className="w-full md:w-1/2 flex justify-end items-center mt-4 md:mt-0">
         <button

@@ -3,7 +3,9 @@ const pool = require("../database");
 // get all ratings
 const getRatings = async () => {
   try {
-    const [ratings] = await pool.query("SELECT * FROM ratings");
+    const [ratings] = await pool.query(
+      "SELECT * FROM ratings ORDER BY created DESC"
+    );
     return ratings;
   } catch (error) {
     console.error("Error fetching ratings:", error);
@@ -79,15 +81,16 @@ const deleteRating = async (id) => {
   );
 
   // updating dining hall rating stats
+  console.log("This is the stars of the review deleted:" + check[0].stars);
   await pool.query(
     `
     UPDATE diningLocations
     SET
       stars = CASE
-        WHEN numberOfReviews > 1 THEN (stars * (numberOfReviews - 1) - ?) / (numberOfReviews - 1)
-        ELSE 0  -- Set stars to 0 if it's the last review being deleted
+        WHEN numberOfReviews > 1 THEN ((stars * numberOfReviews) - ?) / (numberOfReviews - 1)
+        ELSE 0
       END,
-      numberOfReviews = numberOfReviews - 1
+      numberOfReviews = GREATEST(numberOfReviews - 1, 0)
     WHERE locationName = ?
     `,
 

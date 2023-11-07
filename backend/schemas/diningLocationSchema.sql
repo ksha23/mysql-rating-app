@@ -3,10 +3,12 @@ CREATE TABLE diningLocations (
     id integer PRIMARY KEY AUTO_INCREMENT,
     locationName VARCHAR(255) NOT NULL,
     picture VARCHAR(255),
-    stars integer NOT NULL,
+    stars FLOAT NOT NULL,
     numberOfReviews integer NOT NULL,
     physicalLocation VARCHAR(255)
 );
+ALTER TABLE diningLocations
+MODIFY COLUMN stars FLOAT NOT NULL;
 INSERT INTO diningLocations (
         locationName,
         picture,

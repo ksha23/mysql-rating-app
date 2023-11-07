@@ -29,7 +29,7 @@ const getDiningHall = async (locationName) => {
 const getRatingsByDiningHallId = async (locationName) => {
   try {
     const [ratings] = await pool.query(
-      "SELECT * FROM ratings WHERE diningLocation = ?",
+      "SELECT * FROM ratings WHERE diningLocation = ? ORDER BY created DESC",
       [locationName]
     );
     return ratings;

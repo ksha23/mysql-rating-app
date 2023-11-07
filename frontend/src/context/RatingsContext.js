@@ -10,7 +10,7 @@ export const ratingsReducer = (state, action) => {
       };
     case "CREATE_RATING":
       return {
-        ratings: [...state.ratings, action.payload],
+        ratings: [action.payload, ...state.ratings],
       };
     case "DELETE_RATING":
       return {
