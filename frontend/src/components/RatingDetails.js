@@ -18,7 +18,7 @@ const RatingDetails = ({ rating }) => {
 
   return (
     <div className="flex flex-col md:flex-row md:space-x-4 md:items-center bg-white p-4 rounded-md shadow-md my-4">
-      <div className="w-full md:w-1/2">
+      <div className="w-full">
         <h4 className="text-xl font-semibold mb-2">{rating.title}</h4>
         <p className="text-lg">
           <strong>Stars: </strong>
@@ -30,7 +30,7 @@ const RatingDetails = ({ rating }) => {
         </p>
         <p className="text-sm text-gray-600 mt-2">
           {formatDistanceToNow(new Date(rating.created), { addSuffix: true })} |{" "}
-          {rating.diningLocation}
+          {rating.diningLocation.split(" ").slice(0, 2).join(" ")}
         </p>
       </div>
       <div className="w-full md:w-1/2 flex justify-end items-center mt-4 md:mt-0">
