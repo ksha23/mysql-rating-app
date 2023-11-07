@@ -3,20 +3,28 @@ const {
   getDiningHalls,
   getDiningHall,
   getRatingsByDiningHallId,
-  updateReviewList,
 } = require("../controllers/diningHallController");
 
 const router = express.Router();
 
-router.get("/", getDiningHalls);
+router.get("/", async (req, res) => {
+  const diningHalls = await getDiningHalls();
+  res.status(200).send(diningHalls);
+});
 
-router.get("/single/:id", getDiningHall);
+router.get("/location/:locationName", async (req, res) => {
+  const { locationName } = req.params;
+  const diningHall = await getDiningHall(locationName);
+  if (!diningHall) {
+    return res.status(404).json({ error: "No such dining hall" });
+  }
+  res.status(200).send(diningHall);
+});
 
-router.get("/:id", getRatingsByDiningHallId);
-
-router.patch("/:id", updateReviewList); // add a review to the dining hall
-// /api/diningHalls/id with body containing review
-
-// router.patch("/stats/:id", updateReviewStats);
+router.get("/:locationName", async (req, res) => {
+  const { locationName } = req.params;
+  const ratings = await getRatingsByDiningHallId(locationName);
+  res.status(200).send(ratings);
+});
 
 module.exports = router;
