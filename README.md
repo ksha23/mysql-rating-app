@@ -25,5 +25,4 @@ MYSQL_DATABASE='madEats'<br>
 2. Sorting
 3. Searching
 4. Add upvote and downvote on reviews
-5. Make nav stay on screen
-6. make not all reviews load at once (load more button)
+5. make not all reviews load at once (load more button)
