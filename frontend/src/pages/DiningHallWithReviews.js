@@ -53,7 +53,7 @@ const DiningHallWithReviews = () => {
 
   return (
     <>
-      <div className="pl-10 pr-10 justify-center items-center">
+      <div className="pl-10 pr-10 justify-center items-center pt-10">
         <h1 className="text-4xl font-bold text-center pt-10 pb-10">
           {locationName}
         </h1>

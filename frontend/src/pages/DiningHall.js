@@ -23,7 +23,7 @@ const DiningHall = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center pt-10 pb-5">
+      <h1 className="text-4xl font-bold text-center pt-20 pb-5">
         Mad Eats: Dining Halls
       </h1>
       <div className="flex justify-center">

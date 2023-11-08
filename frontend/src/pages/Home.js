@@ -23,7 +23,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="pl-10 pr-10">
+    <div className="pl-10 pr-10 pt-10">
       <h1 className="text-4xl font-bold text-center pt-10 pb-5">
         Mad Eats: All Ratings
       </h1>

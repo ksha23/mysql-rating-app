@@ -3,7 +3,7 @@ import logoImage from "./logo192.png"; // Path to your placeholder image
 
 const Navbar = () => {
   return (
-    <header className="bg-gray-800 text-white py-4">
+    <header className="bg-gray-800 text-white p-4 fixed w-full top-0 z-10">
       <div className="flex items-center pl-4">
         <Link to="/" className="hover:underline">
           <img src={logoImage} alt="logo" className="w-6 h-6 mr-2 inline" />
